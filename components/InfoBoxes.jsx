@@ -2,19 +2,19 @@ import InfoBox from "./InfoBox";
 
 const infoBoxData = [
   {
-    title:'For Renters',
-    content: 'Find your dream rental property. Bookmark properties and contact owners',
+    title:'租客',
+    content: '浏览房源信息，寻找心仪的住房',
     bottonBg: 'bg-black',
     bg:'bg-slate-200',
-    buttonText: 'Browse Properties',
+    buttonText: '浏览房源',
     href:'/properties',
   },
   {
-    title:'For Property Owners',
-    content: 'List your properties and reach potentials. Rent as an airbnb or long term',
+    title:'房东',
+    content: '发布房源，发现租客',
     bottonBg: 'bg-blue-400',
     bg:'bg-blue-100',
-    buttonText: 'Add Property',
+    buttonText: '发布房源',
     href:'/properties/add',
   }
 ]

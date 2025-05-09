@@ -1,6 +1,7 @@
 import './globals.css';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
+import {AuthProvider} from '@/contexts/AuthContext';
 
 // 添加网页metadata
 export const metadata = {
@@ -11,12 +12,15 @@ export const metadata = {
 };
 
 export default function MainLayout ({children}) {
+
   return (
     <html>
-      <body>
-        <NavBar />
-        <main>{children}</main>
-        <Footer />
+      <body className="flex flex-col justify-between h-[100vh]">
+        <AuthProvider>
+          <NavBar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   )

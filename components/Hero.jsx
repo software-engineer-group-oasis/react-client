@@ -7,7 +7,7 @@ export default function Hero() {
       {/* heading */}
       <div>
         <h1 className="text-white text-center
-        font-bold text-6xl">Find The Perfect Rental</h1>
+        font-bold text-6xl">寻找属于你的港湾</h1>
       </div>
       {/* description */}
       <div>
@@ -17,7 +17,7 @@ export default function Hero() {
       {/* utilites */}
       <div className="flex gap-10 justify-center">
         <div>
-          <input type="text" placeholder="Enter location"
+          <input type="text" placeholder="城市"
           className="bg-white rounded-sm p-4"
           style={{
              outline:'none',
@@ -25,11 +25,11 @@ export default function Hero() {
         </div>
         <div>
           <select name="" id="" className="bg-white rounded-sm p-4 w-48">
-            <option value="">All</option>
+            <option value="">全部</option>
           </select>
         </div>
         <div>
-          <button className="bg-sky-500 text-white p-4 rounded-sm">Search</button>
+          <button className="bg-sky-500 text-white p-4 rounded-sm">搜索</button>
         </div>
         
       </div>

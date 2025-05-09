@@ -4,26 +4,27 @@ import { usePathname } from 'next/navigation';
 import Icon from '@mdi/react';
 import { mdiBellBadge,mdiAccountBox,mdiHomeCircle, mdiGoogle} from '@mdi/js';
 import Link from 'next/link';
+import { useAuth } from '@/contexts/AuthContext';
 
 const links = [
   {
     href:'/',
-    name:'Home',
+    name:'首页',
   },
   {
     href:'/properties',
-    name:'Properties',
+    name:'房源',
   },
   {
     href:'/properties/add',
-    name:'Add Property',
+    name:'发布房源',
   }
 ]
 
 export default function NavBar() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const pathname = usePathname();
-  const [isLogin, setIsLogin] = useState(false);
+  const {online} = useAuth();
   return (
     <nav className="bg-blue-500 p-4 flex justify-between">
       {/* logo 导航部分 */}
@@ -32,7 +33,7 @@ export default function NavBar() {
           <Link href='/'><Icon path={mdiHomeCircle}
           size={2} color={'white'}></Icon></Link>
         </div>
-        <div className="text-white font-bold text-2xl">Property Pulse</div>
+        <div className="text-white font-bold text-2xl">OASIS 绿洲租房</div>
         {
           links.map((item,index)=>(
             <div key={index}>
@@ -46,14 +47,19 @@ export default function NavBar() {
       </div>
       {/* 账号 消息 头像部分 */}
       <div className="flex gap-10 items-center">
-        { !isLogin && 
+        { !online && 
           (
-          <div><button className='bg-slate-600 rounded-sm text-white p-2 flex gap-5'>
-          <Icon path={mdiGoogle} size={1}></Icon>Login or Register</button></div>
+          <div>
+          <Link href='/login'>
+            <button className='bg-slate-600 rounded-sm text-white p-2 flex gap-5'>
+              <Icon path={mdiGoogle} size={1}></Icon>登录/注册</button>
+            </Link>  
+          </div>
+          
           )
         }
         {
-          isLogin && (
+          online && (
             <>
             <div>
               <Link href="/messages">

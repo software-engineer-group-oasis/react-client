@@ -1,7 +1,7 @@
 export default function Loading() {
   return (
     <div>
-      Loading...
+      加载中...
     </div>
   )
 }
