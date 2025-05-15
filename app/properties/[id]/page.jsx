@@ -1,15 +1,35 @@
 "use client";
 
-import properties from "@/json/properties.json";
 import Carousel from "./carousel";
 import "./property.css";
 import { Refrigerator, WashingMachine, ShowerHead, AirVent, Tv, Sofa, CookingPot, Wifi, Bed, Toilet } from 'lucide-react';
 import BaiduMap from "@/components/BaiduMap";
+import { useEffect, useState } from "react";
+import { useParams } from 'next/navigation';
+import { getPropertyById } from "@/apis/property.api";
+import Link from "next/link";
 
 export default function Property() {
-    const mockData = properties[0];
-    console.log(mockData);
-    const {name, type, house_type,description, location, beds, baths, area, amenities, rates, seller_info, images} = mockData;
+    const [data, setData] = useState();
+    const {id} = useParams();
+    useEffect(() => {
+        const fetchPropertyData = async() => {
+            try {
+                const propertyData = (await getPropertyById(id)).data;
+                setData(propertyData);
+            } catch (error) {
+                console.log('加载房产信息失败:',error);
+            }
+        };
+        if (id) {
+            fetchPropertyData();
+        }
+    }, [id])
+    if (!data) {
+        return <div>Loading...</div>;
+    }
+
+    const {name, type, house_type,description, location, beds, baths, area, amenities, monthly_rate, seller_info, images} = data;
     return (
         <div className="c-parent">
             <div className='c-container'>
@@ -22,14 +42,14 @@ export default function Property() {
                     {/* 出售者信息 */}
                     <div className="c-card">
                         <div className="c-profile-picture">
-                            <img src={seller_info.image} alt="出售者头像" />
+                            <img src={seller_info?.image} alt="出售者头像" />
                         </div>
                         <hr />
                         <div>
                             <ul>
-                                <li>{seller_info.name}</li>
-                                <li>{seller_info.email}</li>
-                                <li>{seller_info.phone}</li>
+                                <li>{seller_info?.name}</li>
+                                <li>{seller_info?.email}</li>
+                                <li>{seller_info?.phone}</li>
                             </ul>
                         </div>
                     </div>
@@ -39,10 +59,10 @@ export default function Property() {
                     <h2 className="c-heading-2">房屋信息</h2>
                     <div>
                         <ul className='c-grid-3'>
-                            <li className="c-price">{rates.monthly}元/月</li>
+                            <li className="c-price">{monthly_rate}元/月</li>
                             <li>户型：{house_type}</li>
                             <li>位置：{location.province}-{location.city}</li>
-                            <li>地址：{location.address}</li>
+                            <li className="c-link"><Link href="#map">地址：{location.address}</Link></li>
                             <li>面积：{area}平方米</li>
                             <li>类型：{type}</li>
                             <li>卧室：{beds}</li>
@@ -55,16 +75,16 @@ export default function Property() {
                     <h2 className="c-heading-2">房屋配套</h2>
                     <div>
                         <ul className='c-grid-5'>
-                            <li className={amenities.refrigerator ? 'c-skyblue':'c-default'}><Refrigerator />冰箱</li>
-                            <li className={amenities.washing_machine ? 'c-skyblue':'c-default'}><WashingMachine />洗衣机</li>
-                            <li className={amenities.shower_head ? 'c-skyblue':'c-default'}><ShowerHead />热水器</li>
-                            <li className={amenities.air_conditioner ? 'c-skyblue':'c-default'}><AirVent />空调</li>
-                            <li className={amenities.tv ? 'c-skyblue':'c-default'}><Tv />电视</li>
-                            <li className={amenities.sofa ? 'c-skyblue':'c-default'}><Sofa />沙发</li>
-                            <li className={amenities.kitchen ? 'c-skyblue':'c-default'}><CookingPot />厨房</li>
-                            <li className={amenities.wifi ? 'c-skyblue':'c-default'}><Wifi />网络</li>
-                            <li className={amenities.bed ? 'c-skyblue':'c-default'}><Bed />床</li>
-                            <li className={amenities.toilet ? 'c-skyblue':'c-default'}><Toilet />卫生间</li>
+                            <li className={amenities.includes("refrigerator") ? 'c-skyblue':'c-default'}><Refrigerator />冰箱</li>
+                            <li className={amenities.includes("washing_machine") ? 'c-skyblue':'c-default'}><WashingMachine />洗衣机</li>
+                            <li className={amenities.includes("shower_head") ? 'c-skyblue':'c-default'}><ShowerHead />热水器</li>
+                            <li className={amenities.includes("air_conditioner") ? 'c-skyblue':'c-default'}><AirVent />空调</li>
+                            <li className={amenities.includes("tv") ? 'c-skyblue':'c-default'}><Tv />电视</li>
+                            <li className={amenities.includes("sofa") ? 'c-skyblue':'c-default'}><Sofa />沙发</li>
+                            <li className={amenities.includes("kitchen") ? 'c-skyblue':'c-default'}><CookingPot />厨房</li>
+                            <li className={amenities.includes("wifi") ? 'c-skyblue':'c-default'}><Wifi />网络</li>
+                            <li className={amenities.includes("bed") ? 'c-skyblue':'c-default'}><Bed />床</li>
+                            <li className={amenities.includes("toilet") ? 'c-skyblue':'c-default'}><Toilet />卫生间</li>
                         </ul>
                     </div>
                 </div>
@@ -76,7 +96,7 @@ export default function Property() {
                     </div>
                 </div>
                 {/* 地图 */}
-                <div className="c-card">
+                <div className="c-card" id="map">
                     <h2 className="c-heading-2">房屋位置</h2>
                     <BaiduMap center={location.province + location.city + location.address}/>
                 </div>
