@@ -29,7 +29,7 @@ export default function Property() {
         return <div>Loading...</div>;
     }
 
-    const {name, type, house_type,description, location, beds, baths, area, amenities, monthly_rate, seller_info, images} = data;
+    const {name, type, house_type,description, location, beds, baths, area, amenities, monthly_rate, seller_contact, images} = data;
     return (
         <div className="c-parent">
             <div className='c-container'>
@@ -42,14 +42,14 @@ export default function Property() {
                     {/* 出售者信息 */}
                     <div className="c-card">
                         <div className="c-profile-picture">
-                            <img src={seller_info?.image} alt="出售者头像" />
+                            <img src={seller_contact?.image} alt="出售者头像" />
                         </div>
                         <hr />
                         <div>
                             <ul>
-                                <li>{seller_info?.name}</li>
-                                <li>{seller_info?.email}</li>
-                                <li>{seller_info?.phone}</li>
+                                <li>{seller_contact?.name}</li>
+                                <li>{seller_contact?.email}</li>
+                                <li>{seller_contact?.phone}</li>
                             </ul>
                         </div>
                     </div>
