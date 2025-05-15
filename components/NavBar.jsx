@@ -52,7 +52,7 @@ export default function NavBar() {
           <div>
           <Link href='/login'>
             <button className='bg-slate-600 rounded-sm text-white p-2 flex gap-5'>
-              <Icon path={mdiGoogle} size={1}></Icon>登录/注册</button>
+              <Icon path={mdiGoogle} size={1}></Icon>登录</button>
             </Link>  
           </div>
           
