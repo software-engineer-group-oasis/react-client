@@ -10,12 +10,25 @@
     margin-bottom: 1rem;
 }
 
+.c-parent {
+    background: oklch(98.5% 0.001 106.423);
+}
 
 .c-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1rem;
 }
+
+.c-hero {
+    background-color: #f5f5f5;
+    padding: 2rem !important;
+    text-align: center;
+}
+
+.c-img {
+  border-radius: 2rem;
+}
+
 .c-card {
     background-color: #f5f5f5;
     border-radius: 0.5rem;
@@ -27,6 +40,7 @@
 .c-price {
     color: #e54b00;
     font-size: larger;
+    font-weight: bold;
 }
 
 .c-grid-3 {
@@ -51,7 +65,7 @@
 }
 
 .c-flex-container {
-    margin: 5rem;
+    padding: 5rem;
     display: flex;
     justify-content: center;
     align-items: start;
