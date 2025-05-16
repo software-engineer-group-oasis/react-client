@@ -24,7 +24,7 @@ const links = [
 export default function NavBar() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const pathname = usePathname();
-  const {online} = useAuth();
+  const {user} = useAuth();
   return (
     <nav className="bg-blue-500 p-4 flex justify-between">
       {/* logo 导航部分 */}
@@ -47,7 +47,7 @@ export default function NavBar() {
       </div>
       {/* 账号 消息 头像部分 */}
       <div className="flex gap-10 items-center">
-        { !online && 
+        { !user &&
           (
           <div>
           <Link href='/login'>
@@ -59,7 +59,7 @@ export default function NavBar() {
           )
         }
         {
-          online && (
+          user && (
             <>
             <div>
               <Link href="/messages">

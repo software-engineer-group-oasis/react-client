@@ -6,25 +6,26 @@ import { useRouter } from 'next/navigation';
 import toast, { Toaster } from 'react-hot-toast';
 
 export default function Register() {
-    const [selectedRole, setSelectedRole] = useState('tenant'); // 初始化选中值为 'tenant'
+    const [selectedRole, setSelectedRole] = useState('renter'); // 初始化选中值为 'renter'
     const usernameRef = useRef(); // 用于存储用户名输入框的引用
     const emailRef = useRef();
     const passwordRef = useRef();
     const router = useRouter();
     async function handleSubmit(e) {
         e.preventDefault(); // 阻止表单的默认提交行为
-        const username = usernameRef.current.value; // 获取用户名输入框的值
+        const name = usernameRef.current.value; // 获取用户名输入框的值
         const email = emailRef.current.value; // 获取邮箱输入框的值
         const password = passwordRef.current.value; // 获取密码输入框的值
         
         try {
-            await register({ username, email, password , role: selectedRole}); // 调用注册函数，传递用户名、邮箱和密码作为参数
+            const data = await register({ name, email, password }, selectedRole); // 调用注册函数，传递用户名、邮箱和密码作为参数
+            console.log(data);
             console.log('注册成功'); // 注册成功后输出提示信息
             toast.success('注册成功，即将跳往登录页面');
             setTimeout(()=> {router.push('/login')}, 2000);
         } catch (error) {
-            console.error('注册失败:', error);
-            toast.error('注册失败'); 
+            console.error('注册失败:', error.message);
+            toast.error(`注册失败 ${error.message}`);
         }
     }
     return (
@@ -54,10 +55,10 @@ export default function Register() {
                         <input 
                             type="radio" 
                             name="userRole" 
-                            value="tenant" 
+                            value="renter"
                             className="radio radio-primary" 
-                            checked={selectedRole === 'tenant'} 
-                            onChange={() => setSelectedRole('tenant')}
+                            checked={selectedRole === 'renter'}
+                            onChange={() => setSelectedRole('renter')}
                         />
                         &nbsp;
                         租客
@@ -66,10 +67,10 @@ export default function Register() {
                         <input 
                             type="radio" 
                             name="userRole" 
-                            value="landlord" 
+                            value="seller"
                             className="radio radio-primary" 
-                            checked={selectedRole === 'landlord'} 
-                            onChange={() => setSelectedRole('landlord')}
+                            checked={selectedRole === 'seller'}
+                            onChange={() => setSelectedRole('seller')}
                         />
                         &nbsp;
                         房主
