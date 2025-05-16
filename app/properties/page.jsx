@@ -1,11 +1,25 @@
 'use client'
-import properties from '@/json/properties.json';
 import PropertyCard from '@/components/PropertyCard';
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
+import {getProperties} from '@/apis/property.api';
 
 export default function Properties() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6; // 每页显示的数量
+  const [properties, setProperties] = useState([]);
+  useEffect(() => {
+    const fetchProperties = async () => {
+      try {
+        const data = (await getProperties()).data;
+        console.log(data)
+        setProperties(data);
+      } catch (error) {
+        console.error('获取房产信息失败:', error);
+      }
+    };
+    fetchProperties();
+  },[]);
+
 
   // 计算当前页的数据
   const indexOfLastItem = currentPage * itemsPerPage;
