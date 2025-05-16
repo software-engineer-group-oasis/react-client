@@ -88,3 +88,28 @@
 .c-link:hover {
     text-decoration: underline;
 }
+
+.c-chat-form {
+    position: relative;
+}
+
+.c-message-input {
+    width: 100%;
+    background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    outline-color: deepskyblue;
+}
+
+.c-message-button {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #8fd3f4;
+    padding: 0.75rem;
+    color: #fff;
+    border-radius: 0.5rem;
+    cursor: pointer;
+
+}

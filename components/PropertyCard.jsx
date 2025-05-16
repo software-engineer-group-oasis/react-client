@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import Icon from '@mdi/react';
-import { mdiBedEmpty,mdiBathtub,mdiRuler,mdiCash100 ,mdiMap, mdiBed  } from '@mdi/js';
+import { mdiBathtub,mdiRuler ,mdiMap, mdiBed  } from '@mdi/js';
+import "./property-card.css";
+
 export default function PropertyCard({property}) {
   const {type, name, beds, baths, area, location, monthly_rate, id, images} = property;
   const {province, city, address} = location;
@@ -10,7 +12,7 @@ export default function PropertyCard({property}) {
     return monthly_rate ? `${monthly_rate}元/月` : '面议';
   }
   return (
-    <div className="rounded-lg bg-white w-fit overflow-auto shadow-2xl shadow-slate-300">
+    <div className="rounded-lg bg-white w-fit overflow-auto shadow-2xl shadow-slate-300 property-card">
       <div className="relative">
         <img src={images[0]} alt="住房图片" />
         <div className="bg-white p-1 rounded-sm absolute right-2 top-2 text-blue-600 font-bold">{getRateDisplay()}</div>
@@ -32,7 +34,7 @@ export default function PropertyCard({property}) {
         {/* 地址信息和详情按键 */}
         <div className="flex justify-between mt-2">
           <p className="text-red-700"><Icon path={mdiMap} size={.8}/>{province}-{city}-{address}</p>
-          <button className="bg-blue-500 text-white p-2 rounded-lg"><Link href={`/properties/${id}`}>详细信息</Link></button>
+          <button className="bg-blue-500 text-white p-2 rounded-lg detail-button"><Link href={`/properties/${id}`}>详细信息</Link></button>
         </div>
       </div>
     </div>

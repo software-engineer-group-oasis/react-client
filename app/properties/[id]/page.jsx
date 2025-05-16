@@ -2,16 +2,23 @@
 
 import Carousel from "./carousel";
 import "./property.css";
-import { Refrigerator, WashingMachine, ShowerHead, AirVent, Tv, Sofa, CookingPot, Wifi, Bed, Toilet } from 'lucide-react';
+import { Refrigerator, WashingMachine, ShowerHead, AirVent, Tv, Sofa, CookingPot, Wifi, Bed, Toilet, MailPlus, User, Phone } from 'lucide-react';
 import BaiduMap from "@/components/BaiduMap";
 import { useEffect, useState } from "react";
 import { useParams } from 'next/navigation';
 import { getPropertyById } from "@/apis/property.api";
 import Link from "next/link";
+import {sendMessageToChatbot} from "@/apis/property.api";
+import Markdown from "./markdown";
 
 export default function Property() {
     const [data, setData] = useState();
     const {id} = useParams();
+
+    const [userInput, setUserInput] = useState("");
+    const [chatbotResponse, setChatbotResponse] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+
     useEffect(() => {
         const fetchPropertyData = async() => {
             try {
@@ -30,6 +37,23 @@ export default function Property() {
     }
 
     const {name, type, house_type,description, location, beds, baths, area, amenities, monthly_rate, seller_contact, images} = data;
+
+    const handleSendMessage = async () => {
+        if (userInput.trim() === "") return;
+        setIsLoading(true);
+        try {
+            const response = await sendMessageToChatbot(userInput, data);
+            console.log('response from deepseek: ', response);
+            setChatbotResponse(response.data);
+        } catch (error) {
+            console.log('发送消息到 Chatbot 失败:', error);
+            setChatbotResponse('获取回答失败，请稍后重试。');
+        } finally {
+            setIsLoading(false);
+            setUserInput('');
+        }
+    }
+
     return (
         <div className="c-parent">
             <div className='c-container'>
@@ -45,14 +69,38 @@ export default function Property() {
                             <img src={seller_contact?.image} alt="出售者头像" />
                         </div>
                         <hr />
+                        <br />
                         <div>
-                            <ul>
-                                <li>{seller_contact?.name}</li>
-                                <li>{seller_contact?.email}</li>
-                                <li>{seller_contact?.phone}</li>
+                            <ul className='flex flex-col gap-1.5 text-blue-600'>
+                                <li className='flex gap-1'><User /> {seller_contact?.name}</li>
+                                <li className="flex gap-1"><MailPlus />{seller_contact?.email}</li>
+                                <li className='flex gap-1'><Phone /> {seller_contact?.phone}</li>
                             </ul>
                         </div>
                     </div>
+                </div>
+                {/* AI 分析功能 */}
+                <div className="c-card">
+                    <h2 className="c-heading-2">AI 分析</h2>
+                    <form className='c-chat-form'>
+                        <input
+                            className="c-message-input"
+                            type="text"
+                            value={userInput}
+                            onChange={(e) => setUserInput(e.target.value)}
+                            placeholder="输入你的问题..."
+                        />
+                        <button className='c-message-button' onClick={handleSendMessage} disabled={isLoading}>
+                            {isLoading ? '分析中...' : '发送'}
+                        </button>
+                    </form>
+
+                    {chatbotResponse && (
+                        <div>
+                            <h3>Chatbot 回答:</h3>
+                            <Markdown content={chatbotResponse} />
+                        </div>
+                    )}
                 </div>
                 {/* 房屋信息 */}
                 <div className="c-card">

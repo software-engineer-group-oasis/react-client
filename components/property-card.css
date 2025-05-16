@@ -1,0 +1,16 @@
+.detail-button {
+    background-color: #3b82f6;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    opacity: 0;
+    transform: translateY(0.5rem);
+    visibility: hidden;
+    transition: all 300ms ease;
+}
+
+.property-card:hover .detail-button {
+    opacity: 1;
+    transform: translateY(-0.5rem);
+    visibility: visible;
+}

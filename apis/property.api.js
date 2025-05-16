@@ -1,6 +1,8 @@
+import {BASE_URL, DEFAULT_CONFIG} from './config';
+
 export const getPropertyById = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/v1/properties/${id}`);
+      const response = await fetch(`${BASE_URL}/properties/${id}`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -14,13 +16,33 @@ export const getPropertyById = async (id) => {
 
 export const getProperties = async() => {
     try {
-        const res = await fetch(`http://localhost:5000/api/v1/properties`);
+        const res = await fetch(`${BASE_URL}/properties`);
         if (!res.ok) {
             throw new Error(`HTTP error! status: ${res.status}`);
         }
         return res.json();
     } catch (error) {
         console.error('获取房产信息失败:', error);
+        throw error;
+    }
+}
+
+export const sendMessageToChatbot = async(userInput, data) => {
+    try {
+        const postData = {
+            message: userInput,
+            json_data: JSON.stringify(data),
+        }
+        const res = await fetch(`${BASE_URL}/deepseek`, {
+            ...DEFAULT_CONFIG,
+            body: JSON.stringify(postData),
+        })
+        if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+    } catch (error) {
+        console.log(error);
         throw error;
     }
 }
