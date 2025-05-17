@@ -3,6 +3,7 @@
 import {getProvinces, getCities} from "@/apis/district.api";
 import {useEffect, useState} from "react";
 import {Search} from "lucide-react";
+import {useRouter} from "next/navigation";
 
 export default function Hero() {
     const [provinces, setProvinces] = useState([]);
@@ -40,6 +41,12 @@ export default function Hero() {
             })();
         }
     }, [province])
+
+    const router = useRouter();
+
+    const handleSearch = () => {
+        router.push(`/properties?province=${province.substring(0, province.length - 1)}&city=${city.substring(0, city.length - 1)}`);
+    }
 
   return (
     <section className='bg-blue-500 p-12 flex flex-col gap-5'>
@@ -80,7 +87,7 @@ export default function Hero() {
                 </select>
             </div>
 
-            <button onClick={()=> console.log('搜索：', province, city)}
+            <button onClick={()=> handleSearch()}
                     className="bg-white rounded-[50%] p-4 hover:bg-blue-200 cursor-pointer"
             ><Search /></button>
         </div>
