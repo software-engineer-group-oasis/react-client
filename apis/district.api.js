@@ -19,8 +19,43 @@ export async function getCities(province) {
             throw new Error('请求失败')
         }
         return res.json();
+    } catch (error) {
+        throw error;
     }
-    catch (error) {
+}
+
+export async function getDistricts(city) {
+    try {
+        const res = await fetch(`${BASE_URL}/districts?city=${city}`)
+        if (!res.ok) {
+            throw new Error('请求失败')
+        }
+        return res.json();
+    } catch (error) {
+        throw error;
+    }
+}
+
+export async function getStreets(district) {
+    try {
+        const res = await fetch(`${BASE_URL}/streets?district=${district}`)
+        if (!res.ok) {
+            throw new Error('请求失败')
+        }
+        return res.json();
+    } catch (error) {
+        throw error;
+    }
+}
+
+export async function getAddressDetail(address) {
+    try {
+        const res = await fetch(`${BASE_URL}/detail?address=${address}`)
+        if (!res.ok) {
+            throw new Error('请求失败')
+        }
+        return res.json();
+    } catch (error) {
         throw error;
     }
 }

@@ -15,11 +15,12 @@ export default function Hero() {
     useEffect(() => {
         const fetchProvinces = async () => {
             try {
-
-                const districts = (await getProvinces()).data.districts[0].districts;
-                console.log("districts: ", districts)
-                setProvinces(districts);
-                setProvince(districts[0].name);
+                const data = await getProvinces();
+                console.log("provinces: ", data);
+                setProvinces(data);
+                if (data && data.length > 0) {
+                    setProvince(data[0].name);
+                }
             } catch (error) {
                 console.error('获取省份信息失败:', error);
             }
@@ -31,10 +32,12 @@ export default function Hero() {
         if (province) {
             (async() => {
                 try {
-                    const districts = (await getCities(province)).data.districts[0].districts;
-                    console.log(districts)
-                    setCities(districts);
-                    setCity(districts[0].name);
+                    const data = await getCities(province);
+                    console.log("cities: ", data);
+                    setCities(data);
+                    if (data && data.length > 0) {
+                        setCity(data[0].name);
+                    }
                 } catch (error) {
                     console.error('获取城市信息失败:', error);
                 }
