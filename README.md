@@ -1,5 +1,6 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+![](./images/首页.png)
 ![](./images/properties.png)
 ![](./images/property-1.png)
 ![](./images/property-2.png)
