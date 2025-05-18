@@ -46,3 +46,16 @@ export const sendMessageToChatbot = async(userInput, data) => {
         throw error;
     }
 }
+
+export const getPropertiesByLocation = async(province, city) => {
+    try {
+        const res = await fetch(`${BASE_URL}/properties/search?province=${province}&city=${city}`);
+        if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+    } catch (error) {
+        console.log("获取房源信息出错", error);
+        throw error;
+    }
+}
