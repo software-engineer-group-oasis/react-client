@@ -1,5 +1,24 @@
 import {BASE_URL, DEFAULT_CONFIG} from './config';
 
+// 添加缺失的 addProperty 函数
+export const addProperty = async (propertyData) => {
+    try {
+        const response = await fetch(`${BASE_URL}/properties`, {
+            ...DEFAULT_CONFIG,
+            body: JSON.stringify(propertyData),
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        return response.json();
+    } catch (error) {
+        console.error('添加房产信息失败:', error);
+        throw error;
+    }
+};
+
 export const getPropertyById = async (id) => {
     try {
       const response = await fetch(`${BASE_URL}/properties/${id}`);
