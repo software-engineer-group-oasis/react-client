@@ -59,3 +59,18 @@ export const getPropertiesByLocation = async(province, city) => {
         throw error;
     }
 }
+
+export const deleteProperty = async (id) => {
+    try {
+        const response = await fetch(`${BASE_URL}/properties/${id}`, {
+            method: 'DELETE',
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    } catch (error) {
+        console.error('删除房产信息失败:', error);
+        throw error;
+    }
+};

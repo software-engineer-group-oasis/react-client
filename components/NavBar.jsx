@@ -18,6 +18,10 @@ const links = [
   {
     href:'/properties/add',
     name:'发布房源',
+  },
+  {
+    href:'/manage',
+    name:'房源管理',
   }
 ]
 
