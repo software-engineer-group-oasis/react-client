@@ -5,6 +5,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ![](./images/property-1.png)
 ![](./images/property-2.png)
 ![](./images/chat-bot.png)
+![](./images/manage.png)
 
 ## Getting Started
 
