@@ -5,6 +5,7 @@ import { getProperties, deleteProperty } from '@/apis/property.api';
 import { Search, Filter, Edit, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 // 模拟数据
 const mockProperties = [
@@ -86,6 +87,16 @@ export default function ManagePage() {
     const [filterType, setFilterType] = useState('all');
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
+    const router = useRouter();
+
+    const userObj = JSON.parse(localStorage.getItem('user'))
+    if ('renter_id' in userObj) {
+        toast.error('你不是房东，无法发布房源')
+        setTimeout(()=> {
+          router.push('/login')
+    
+        }, 2000);
+    }
 
     const fetchProperties = async () => {
         try {

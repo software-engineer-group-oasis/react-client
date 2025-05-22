@@ -1,0 +1,35 @@
+.c-profile-form {
+    display: flex;
+    flex-direction: column;
+   
+    padding-top: 2rem;
+    align-items: center;
+    
+}
+
+
+.c-form-item {
+    padding: 0.5rem;
+}
+
+.c-input {
+    border: 1px solid #eee;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    background-color: #ddd;
+    
+}
+
+.c-button {
+    border-radius: 1rem;
+    background-color: #ddd;
+    padding: 0.5rem;
+    cursor: pointer;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+}
+
+.c-button:hover {
+    background-color: #aaa;
+    
+}

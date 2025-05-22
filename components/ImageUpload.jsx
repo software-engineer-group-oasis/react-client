@@ -19,7 +19,7 @@ export default function ImageUpload({ onChange, maxFiles = 5 }) {
         formData.append('images', file);
       });
       
-      const response = await fetch('/api/upload', {
+      const response = await fetch('http://localhost:5000/api/v1/upload', {
         method: 'POST',
         body: formData
       });
@@ -28,8 +28,9 @@ export default function ImageUpload({ onChange, maxFiles = 5 }) {
         throw new Error('上传失败');
       }
 
-      const data = await response.json();
-      const newImages = data.urls.map((url, index) => ({
+      const data = (await response.json()).data;
+      console.log(data)
+      const newImages = data.map((url, index) => ({
         image_url: url,
         sort_order: preview.length + index
       }));

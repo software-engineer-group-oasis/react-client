@@ -72,9 +72,9 @@ export default function PropertyForm({ onSubmit, initialData = {}, submitText = 
     e.preventDefault();
     const data = {
       location: {
-        address: formData.address,
-        city: formData.city,
-        province: formData.province
+        address: formData.address.district + formData.address.street + formData.address.detail,
+        city: formData.address.city,
+        province: formData.address.province
       },
       seller: {
         name: formData.sellerName,
@@ -93,7 +93,9 @@ export default function PropertyForm({ onSubmit, initialData = {}, submitText = 
         baths: parseInt(formData.baths),
         area: parseFloat(formData.area),
         monthly_rate: parseFloat(formData.monthlyRate),
-        is_featured: false
+        is_featured: false,
+        property_id: Date.now().toString() + Math.floor(Math.random() * 10000).toString(),
+        owner_id:  Date.now().toString() + Math.floor(Math.random() * 10000).toString(),
       },
       amenities: formData.amenities,
       images: formData.images

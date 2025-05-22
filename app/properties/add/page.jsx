@@ -6,6 +6,15 @@ import toast, { Toaster } from 'react-hot-toast';
 
 export default function PropertiesAdd() {
   const router = useRouter();
+  const userObj = JSON.parse(localStorage.getItem('user'))
+  console.log("useObj", userObj);
+  if ("renter_id" in userObj) {
+    toast.error('你不是房东，无法发布房源')
+    setTimeout(()=> {
+      router.push('/login')
+
+    }, 2000);
+  }
 
   const handleSubmit = async (data) => {
     try {

@@ -1,6 +1,9 @@
 "use client"
 import React from "react";
 import { useState } from "react";
+import Link from "next/link";
+import { Box } from "lucide-react";
+
 export default function Carousel({images, width='100%', height='auto'}) {
     const length = images.length; // 图片数量
     if (length === 0) return null; // 空数组不渲染任何
@@ -21,6 +24,7 @@ export default function Carousel({images, width='100%', height='auto'}) {
                 }
             </div>
             <p>{index + 1}/{length}</p>
+            <Link href="/three" className="btn btn-primary"><Box /> 3D 看房</Link>
         </div>
     )
 }

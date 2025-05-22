@@ -29,6 +29,7 @@ export default function NavBar() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const pathname = usePathname();
   const {user} = useAuth();
+
   return (
     <nav className="bg-blue-500 p-4 flex justify-between">
       {/* logo 导航部分 */}
@@ -71,15 +72,9 @@ export default function NavBar() {
               </Link>
             </div>
             <div>
-              <Icon path={mdiAccountBox} size={1} color={'white'}
-                onClick={()=> setIsProfileOpen(prev => !prev)}></Icon>
-              {
-                isProfileOpen && 
-                <div className='absolute bg-white right-10 top-16 p-4 shadow shadow-sky-200'>
-                  <p>Name</p>
-                </div>
-              }
-              
+              <Link href="/profile">
+                <Icon path={mdiAccountBox} size={1} color={'white'}></Icon>
+              </Link>
             </div>
             </>
           )

@@ -73,8 +73,8 @@ export default function Property() {
                         <div>
                             <ul className='flex flex-col gap-1.5 text-blue-600'>
                                 <li className='flex gap-1'><User /> {seller_contact?.name}</li>
-                                <li className="flex gap-1"><MailPlus />{seller_contact?.email}</li>
-                                <li className='flex gap-1'><Phone /> {seller_contact?.phone}</li>
+                                <li className="flex gap-1"><MailPlus /> <a href={`mailto:${seller_contact?.email}`}>{seller_contact?.email}</a></li>
+                                <li className='flex gap-1'><Phone /> <a href={`tel:${seller_contact?.phone}`}>{seller_contact?.phone}</a></li>
                             </ul>
                         </div>
                     </div>
