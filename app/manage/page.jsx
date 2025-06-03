@@ -89,13 +89,15 @@ export default function ManagePage() {
     const itemsPerPage = 10;
     const router = useRouter();
 
-    const userObj = JSON.parse(localStorage.getItem('user'))
-    if ('renter_id' in userObj) {
-        toast.error('你不是房东，无法发布房源')
-        setTimeout(()=> {
-          router.push('/login')
-    
-        }, 2000);
+    const checkUser = () => {
+        const userObj = JSON.parse(localStorage.getItem('user'))
+        if ('renter_id' in userObj) {
+            toast.error('你不是房东，无法发布房源')
+            setTimeout(()=> {
+            router.push('/login')
+        
+            }, 300);
+        }
     }
 
     const fetchProperties = async () => {
@@ -111,6 +113,7 @@ export default function ManagePage() {
     };
 
     useEffect(() => {
+        checkUser();
         fetchProperties();
     }, []);
 
