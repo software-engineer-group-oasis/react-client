@@ -26,7 +26,7 @@ export default function HomeProperties() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                   {
                     // 展示前3条
-                    properties.slice(properties.length - 3,properties.length).map((item, index)=>(
+                    properties.slice(0, 3).map((item, index)=>(
                       <div key={index}>
                         <PropertyCard property={item}></PropertyCard>
                       </div>
