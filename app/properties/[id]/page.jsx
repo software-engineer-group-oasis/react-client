@@ -9,7 +9,7 @@ import { useParams } from 'next/navigation';
 import { getPropertyById } from "@/apis/property.api";
 import Link from "next/link";
 import {sendMessageToChatbot} from "@/apis/property.api";
-import Markdown from "./markdown";
+import Markdown from "./Markdown";
 
 export default function Property() {
     const [data, setData] = useState();
