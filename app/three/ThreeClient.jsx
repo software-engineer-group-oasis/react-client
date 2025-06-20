@@ -19,7 +19,6 @@ export default function Three() {
     })
 
     return (
-        <Suspense fallback={<div>Loading...</div>}>
             <Canvas camera={{position:[2,2,5], fov:50}}>
                 <ambientLight intensity={0.5}/>
                 <directionalLight position={[5, 10, 7.5]} intensity={1} castShadow/>
@@ -27,6 +26,5 @@ export default function Three() {
                     rotation={[rotX, rotY, rotZ]}/>
                 <OrbitControls />
             </Canvas>
-        </Suspense>
     )
 }

@@ -39,7 +39,7 @@ export default function NavBar() {
           size={2} color={'white'}></Icon></Link>
         </div>
         <div className="text-white font-bold text-2xl">OASIS 绿洲租房</div>
-        {
+        { user &&
           links.map((item,index)=>(
             <div key={index}>
               <Link href={item.href}>

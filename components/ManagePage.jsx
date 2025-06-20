@@ -88,13 +88,15 @@ export default function ManagePage() {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
     const router = useRouter();
+    const username = JSON.parse(localStorage.getItem("user")).name
 
     const fetchProperties = async () => {
         try {
-            // 注释掉实际API调用，使用模拟数据
-            // const data = (await getProperties()).data;
-            // setProperties(data);
-            setProperties(mockProperties);
+            const res = await fetch(`/api/manage/user?name=${username}`)
+            const data = (await res.json()).data
+            console.log(data)
+            setProperties(data);
+            //setProperties(mockProperties);
         } catch (error) {
             console.error('获取房产信息失败:', error);
             toast.error('获取房产信息失败');

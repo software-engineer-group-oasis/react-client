@@ -37,7 +37,7 @@ export default function PropertiesAdd() {
             <p className="mt-2 text-sm text-gray-600">请填写以下信息来发布您的房源</p>
           </div>
           <Toaster position="top-center" />
-          <PropertyForm onSubmit={handleSubmit} submitText="发布房源" />
+          <PropertyForm onSubmit={handleSubmit} submitText="发布房源" user={userObj} />
         </div>
       </div>
     </div>

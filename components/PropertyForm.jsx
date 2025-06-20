@@ -3,7 +3,7 @@ import { useState } from 'react';
 import ImageUpload from './ImageUpload';
 import AddressSelector from './AddressSelector';
 
-export default function PropertyForm({ onSubmit, initialData = {}, submitText = '提交' }) {
+export default function PropertyForm({ onSubmit, initialData = {}, submitText = '提交' , user}) {
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -26,9 +26,9 @@ export default function PropertyForm({ onSubmit, initialData = {}, submitText = 
     beds: 1,
     baths: 1,
     amenities: [],
-    sellerName: '',
-    sellerEmail: '',
-    sellerPhone: '',
+    sellerName: user.name?user.name:'',
+    sellerEmail: user.email?user.email:'',
+    sellerPhone: user.phone?user.phone:'',
     images: [],
     ...initialData
   });

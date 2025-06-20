@@ -18,7 +18,6 @@ export default function Property() {
     const [userInput, setUserInput] = useState("");
     const [chatbotResponse, setChatbotResponse] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-
     useEffect(() => {
         const fetchPropertyData = async() => {
             try {
